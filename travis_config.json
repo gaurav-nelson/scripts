@@ -1,0 +1,27 @@
+{
+  "request": {
+    "config": {
+      "merge_mode": "replace",
+      "language": "node_js",
+      "env": ["PR_URL={{PullRequestURL}}", "AUTHOR={{AuthorUsername}}"],
+      "cache": {
+        "directories": ["node_modules"]
+      },
+      "before_script": [
+        "wget https://github.com/gaurav-nelson/scripts/raw/master/results.sh",
+        "chmod +x results.sh",
+        "wget https://github.com/gaurav-nelson/scripts/raw/master/tests.sh",
+        "chmod +x scripts/tests.sh",
+        "https://github.com/gaurav-nelson/scripts/raw/master/xrefcheck.js",
+        "chmod +x scripts/xrefcheck.js",
+        "setrepo.sh"
+      ],
+      "script": [
+        "npm i -g asciidoc-link-check",
+        "npm i asciidoc-xref-extractor",
+        "tests.sh",
+        "results.sh"
+      ]
+    }
+  }
+}
