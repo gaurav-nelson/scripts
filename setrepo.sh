@@ -1,11 +1,14 @@
 #!/bin/bash
 set -ev
 
-#set the upstream project
-git remote add upstream git@github.com:openshift/openshift-docs.git
+#set the remote to user repository
+git remote add userrepo git@github.com:$REPO_NAME.git
 
-#download the pull request data
-git fetch upstream pull/$PR_NUMBER/head:PR_$PR_NUMBER
+#add branch to remote
+git remote set-branches --add userrepo $PR_BRANCH
 
-#switch to the PR branch
-git checkout PR_$PR_NUMBER
+#fetch updated changes
+git fetch userrepo
+
+#checkout branch
+git checkout -b pr_branch userrepo/$PR_BRANCH
