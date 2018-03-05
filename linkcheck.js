@@ -16,15 +16,15 @@ var folderPath = path.resolve(args[2]);
 
 var links = asciidocLinkExtractor(asciidocFile);
 var cleanedLinks = [];
+var filenamelisted = false;
 
-console.log("FILE: ", args[2])
 links.forEach(function(link) {
-    if (
-      !link.match(
-        /(example\.(?:com|org|test)|localhost|my\.proxy|http(?:s|):\/\/\$|http(?:s|):\/\/\%|location_of_rpm_server|\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})/
-      )
+  if (
+    !link.match(
+      /(example\.(?:com|org|test)|localhost|my\.proxy|http(?:s|):\/\/\$|http(?:s|):\/\/\%|location_of_rpm_server|\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})/
     )
-      cleanedLinks.push(link);
+  )
+    cleanedLinks.push(link);
 });
 
 cleanedLinks.forEach(function(link) {
@@ -33,7 +33,14 @@ cleanedLinks.forEach(function(link) {
       console.error(err);
       return;
     }
-    if (result.status == "dead")
-      console.log(`\x1b[31m[X]\x1b[0m ${result.link} \x1b[31mis ${result.status}\x1b[0m`);
+    if (result.status == "dead") {
+      if (filenamelisted == false) {
+        console.log("FILE: ", args[2]);
+        filenamelisted = true;
+      }
+      console.log(
+        `\x1b[31m[X]\x1b[0m ${result.link} \x1b[31mis ${result.status}\x1b[0m`
+      );
+    }
   });
 });
