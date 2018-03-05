@@ -2,7 +2,7 @@
 set -ev
 
 #set the remote to user repository
-git remote add userrepo git@github.com:$REPO_NAME.git
+git remote add userrepo https://github.com/$REPO_NAME.git
 
 #add branch to remote
 git remote set-branches --add userrepo $PR_BRANCH
