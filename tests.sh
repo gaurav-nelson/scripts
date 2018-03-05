@@ -6,6 +6,7 @@ touch _internal.txt
 touch _blocks.txt
 
 COMMIT_HASH="$(git rev-parse @~)" #get the previous commit hash 
+git diff --name-only $COMMIT_HASH
 
 for i in $(git diff --name-only "${COMMIT_HASH}") ; do
   fileList[$N]="$i"

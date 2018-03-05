@@ -17,6 +17,7 @@ var folderPath = path.resolve(args[2]);
 var links = asciidocLinkExtractor(asciidocFile);
 var cleanedLinks = [];
 
+console.log("FILE: ", args[2])
 links.forEach(function(link) {
     if (
       !link.match(

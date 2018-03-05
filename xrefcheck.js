@@ -17,6 +17,8 @@ var xrefs = asciidocXrefExtractor(asciidocFile);
 var int_xrefs = [];
 var ext_xrefs = [];
 
+console.log("FILE: ", args[2])
+
 xrefs.forEach(function(link) {
   //TO DO: Before pushing xrefs convert all {attributes} to actual strings
   if (link.match(/(.adoc)/)) {

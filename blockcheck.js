@@ -10,5 +10,5 @@ if (process.argv.length < 3) {
 }
 
 var asciidoc = process.argv[2]
-
+console.log("FILE: ", asciidoc)
 asciidocBlocksCheck(asciidoc)
