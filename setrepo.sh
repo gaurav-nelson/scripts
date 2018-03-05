@@ -8,7 +8,7 @@ git remote add userrepo https://github.com/$REPO_NAME.git
 git remote set-branches --add userrepo $PR_BRANCH
 
 #fetch updated changes
-git fetch userrepo
+git fetch userrepo $PR_BRANCH
 
 #checkout branch
 git checkout -b pr_branch userrepo/$PR_BRANCH

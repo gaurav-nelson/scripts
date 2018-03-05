@@ -3,7 +3,7 @@
 "use strict";
 
 var fs = require("fs");
-var asciidocXrefExtractor = require("../node_modules/asciidoc-xref-extractor");
+var asciidocXrefExtractor = require("./node_modules/asciidoc-xref-extractor");
 var path = require("path");
 var args = process.argv;
 //console.log("ARGUMENTS: ", args);

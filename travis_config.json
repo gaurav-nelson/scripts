@@ -2,7 +2,10 @@
   "request": {
     "config": {
       "merge_mode": "replace",
-      "language": "node_js",
+        "language": "node_js",
+        "node_js": [
+          "8"
+        ],
       "env": {
         "global": [
           "REPO_NAME={{33643330__head__repo__full_name}}",
@@ -31,6 +34,7 @@
         "bash setrepo.sh"
       ],
       "script": [
+        "npm i -g npm",
         "npm i asciidoc-link-check",
         "npm i asciidoc-link-extractor",
         "npm i asciidoc-xref-extractor",
