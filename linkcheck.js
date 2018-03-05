@@ -7,7 +7,7 @@ var fs = require("fs");
 var asciidocLinkExtractor = require("./node_modules/asciidoc-link-extractor");
 var linkCheck = require("./node_modules/link-check");
 var path = require("path");
-const args = process.argv;
+var args = process.argv;
 //console.log("ARGUMENTS: ", args);
 
 var asciidocFile = fs.readFileSync(args[2]).toString();
