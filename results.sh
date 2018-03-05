@@ -3,6 +3,7 @@ set -ev
 
 cat _external.txt
 cat _internal.txt
+cat _blocks.txt
 
 #COMMENT_DATA=`cat _external.txt _internal.txt`
 

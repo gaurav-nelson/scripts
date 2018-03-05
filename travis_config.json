@@ -34,7 +34,6 @@
         "bash setrepo.sh"
       ],
       "script": [
-        "npm i -g npm",
         "npm i asciidoc-link-check",
         "npm i asciidoc-link-extractor",
         "npm i asciidoc-xref-extractor",
