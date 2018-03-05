@@ -3,8 +3,8 @@
     "config": {
       "merge_mode": "replace",
       "language": "node_js",
-      "env": ["PR_URL={{PullRequestURL}}", "AUTHOR={{AuthorUsername}}"],
-      "cache": {
+      "env": ["PR_NUMBER={{33643330__number}}", "AUTHOR={{33643330__user__login}}"],
+     "cache": {
         "directories": ["node_modules"]
       },
       "before_script": [
@@ -14,11 +14,17 @@
         "chmod +x scripts/tests.sh",
         "https://github.com/gaurav-nelson/scripts/raw/master/xrefcheck.js",
         "chmod +x scripts/xrefcheck.js",
+        "https://github.com/gaurav-nelson/scripts/raw/master/linkcheck.js",
+        "chmod +x scripts/linkcheck.js",
+        "https://github.com/gaurav-nelson/scripts/raw/master/blockcheck.js",
+        "chmod +x scripts/blockcheck.js",
         "setrepo.sh"
       ],
       "script": [
-        "npm i -g asciidoc-link-check",
+        "npm i asciidoc-link-check",
+        "npm i asciidoc-link-extractor",
         "npm i asciidoc-xref-extractor",
+        "npm i asciidoc-blocks-check",
         "tests.sh",
         "results.sh"
       ]
