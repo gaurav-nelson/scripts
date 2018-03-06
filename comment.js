@@ -26,7 +26,7 @@ fs.readFile("_external.txt", function(err, data) {
 function doComment(string){
   fetch(url, {
     method: "POST",
-    body: string,
+    body: "comment from Travis!",
     headers: { "Authorization" : token_data }
   })
     .then(res => res.json())
