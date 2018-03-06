@@ -21,7 +21,7 @@ var filenamelisted = false;
 links.forEach(function(link) {
   if (
     !link.match(
-      /(example\.(?:com|org|test)|localhost|my\.proxy|http(?:s|):\/\/\$|http(?:s|):\/\/\%|location_of_rpm_server|\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})/
+      /(example\.(?:com|org|test)|localhost|my\.proxy|http(?:s|):\/\/\$|http(?:s|):\/\/\%|location_of_rpm_server|\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}|someaccount\.)/
     )
   )
     cleanedLinks.push(link);
@@ -39,7 +39,7 @@ cleanedLinks.forEach(function(link) {
         filenamelisted = true;
       }
       console.log(
-        `\x1b[31m[X]\x1b[0m ${result.link} \x1b[31mis ${result.status}\x1b[0m`
+        `\x1b[31m[X]\x1b[0m ${result.link}`
       );
     }
   });
