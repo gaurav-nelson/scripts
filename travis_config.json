@@ -24,13 +24,15 @@
         "wget https://github.com/gaurav-nelson/scripts/raw/master/results.sh",
         "chmod +x results.sh",
         "wget https://github.com/gaurav-nelson/scripts/raw/master/tests.sh",
-        "chmod +x scripts/tests.sh",
+        "chmod +x tests.sh",
         "wget https://github.com/gaurav-nelson/scripts/raw/master/xrefcheck.js",
-        "chmod +x scripts/xrefcheck.js",
+        "chmod +x xrefcheck.js",
         "wget https://github.com/gaurav-nelson/scripts/raw/master/linkcheck.js",
-        "chmod +x scripts/linkcheck.js",
+        "chmod +x linkcheck.js",
         "wget https://github.com/gaurav-nelson/scripts/raw/master/blockcheck.js",
-        "chmod +x scripts/blockcheck.js",
+        "chmod +x blockcheck.js",
+        "wget https://github.com/gaurav-nelson/scripts/raw/master/comment.js",
+        "chmod +x comment.js",
         "bash setrepo.sh"
       ],
       "script": [
@@ -39,7 +41,8 @@
         "npm i asciidoc-xref-extractor",
         "npm i asciidoc-blocks-check",
         "bash tests.sh",
-        "bash results.sh"
+        "bash results.sh",
+        "node comment.js"
       ]
     }
   }
