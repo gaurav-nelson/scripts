@@ -7,14 +7,6 @@ var fetch = require("node-fetch");
 var fileData = [];
 var i;
 
-fs.readFile("_external.txt", function(err, data) {
-  if (err) throw err;
-  fileData = data.toString().split("\n");
-  for (i in fileData) {
-    console.log(fileData[i]);
-  }
-});
-
 var url =
   "https://api.github.com/repos/" +
   process.env.BASE_REPO +
@@ -23,10 +15,21 @@ var url =
   "/comments";
 var token_data = "token " + process.env.GITHUB_TOKEN;
 
-fetch(url, {
-  method: "POST",
-  body: JSON.stringify(fileData),
-  headers: { "Content-Type": "application/json", Authorization: token_data }
-})
-  .then(res => res.json())
-  .then(json => console.log(json));
+fs.readFile("_external.txt", function(err, data) {
+  if (err) throw err;
+  fileData = data.toString().split("\n");
+  for (i in fileData) {
+    console.log(fileData[i]);
+  }
+  doComment(JSON.stringify(fileData))
+});
+
+function doComment(jsonData){
+  fetch(url, {
+    method: "POST",
+    body: jsonData,
+    headers: { "Content-Type": "application/json", Authorization: token_data }
+  })
+    .then(res => res.json())
+    .then(json => console.log(json));
+}
