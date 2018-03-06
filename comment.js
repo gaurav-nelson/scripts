@@ -25,7 +25,7 @@ function doComment(string){
   fetch(url, {
     method: "POST",
     body: string,
-    headers: { "Content-Type": "application/json", Authorization: token_data }
+    headers: { "Authorization" : token_data }
   })
     .then(res => res.json())
     .then(json => console.log(json));
