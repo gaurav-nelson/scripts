@@ -19,6 +19,7 @@ fs.readFile("_external.txt", function(err, data) {
   if (err) throw err;
   fileData = data.toString().split("\n");
   for (i in fileData) {
+    console.log("ARRAY OUTPUT")
     console.log(fileData[i]);
   }
   doComment(JSON.stringify(fileData))
