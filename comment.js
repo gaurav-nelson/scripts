@@ -5,12 +5,13 @@
 var fs = require("fs");
 var fetch = require("node-fetch");
 var fileData = [];
+var i;
 
 fs.readFile("_external.txt", function(err, data) {
   if (err) throw err;
   fileData = data.toString().split("\n");
-  for (i in array) {
-    console.log(array[i]);
+  for (i in fileData) {
+    console.log(fileData[i]);
   }
 });
 
