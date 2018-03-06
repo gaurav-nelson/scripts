@@ -17,7 +17,7 @@ for i in $(git diff --name-only "${COMMIT_HASH}") ; do
   echo -e "\e[32mBLOCK CHECK\e[0m"
   echo "$(node blockcheck.js $i)" &>> _blocks.txt
   echo $'\n'
-  let "N= $N + 1"
+  (( N= $N + 1 ))
 done
 
 
