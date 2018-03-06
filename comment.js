@@ -15,13 +15,13 @@ fs.readFile("_external.txt", function(err, data) {
   }
 });
 
-url =
+var url =
   "https://api.github.com/repos/" +
   process.env.BASE_REPO +
   "/issues/" +
   process.env.PR_NUMBER +
   "/comments";
-token_data = "token " + process.env.GITHUB_TOKEN;
+var token_data = "token " + process.env.GITHUB_TOKEN;
 
 fetch(url, {
   method: "POST",
