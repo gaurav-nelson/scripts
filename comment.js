@@ -7,13 +7,13 @@ var fetch = require("node-fetch");
 var fileData = [];
 var i;
 
-var url =
+/*var url =
   "https://api.github.com/repos/" +
   process.env.BASE_REPO +
   "/issues/" +
   process.env.PR_NUMBER +
   "/comments";
-var token_data = "token " + process.env.GITHUB_TOKEN;
+var token_data = "token " + process.env.GITHUB_TOKEN;*/
 
 fs.readFile("_external.txt", function(err, data) {
   if (err) throw err;
@@ -24,10 +24,9 @@ fs.readFile("_external.txt", function(err, data) {
 });
 
 function doComment(string){
-  fetch(url, {
+  fetch('https://hooks.zapier.com/hooks/catch/3022285/kbcwnf/silent/', {
     method: "POST",
-    body: "comment from Travis!",
-    headers: { "Authorization" : token_data }
+    body: string
   })
     .then(res => res.json())
     .then(json => console.log(json));
