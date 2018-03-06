@@ -17,18 +17,14 @@ var token_data = "token " + process.env.GITHUB_TOKEN;
 
 fs.readFile("_external.txt", function(err, data) {
   if (err) throw err;
-  fileData = data.toString().split("\n");
-  for (i in fileData) {
-    console.log("ARRAY OUTPUT")
-    console.log(fileData[i]);
-  }
-  doComment(JSON.stringify(fileData))
+  fileData = data.toString();
+  doComment(fileData)
 });
 
-function doComment(jsonData){
+function doComment(string){
   fetch(url, {
     method: "POST",
-    body: jsonData,
+    body: string,
     headers: { "Content-Type": "application/json", Authorization: token_data }
   })
     .then(res => res.json())
