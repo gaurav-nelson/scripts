@@ -18,6 +18,8 @@ var token_data = "token " + process.env.GITHUB_TOKEN;
 fs.readFile("_external.txt", function(err, data) {
   if (err) throw err;
   fileData = data.toString();
+  fileData = fileData.replace('[','');
+  fileData = fileData.replace(']','');
   doComment(fileData)
 });
 
