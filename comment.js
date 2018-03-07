@@ -18,16 +18,38 @@ var token_data = "token " + process.env.GITHUB_TOKEN;*/
 fs.readFile("_external.txt", function(err, data) {
   if (err) throw err;
   fileData = data.toString();
-  fileData = fileData.replace('[','');
-  fileData = fileData.replace(']','');
-  doComment(fileData)
+  fileData = fileData.replace("[", "");
+  fileData = fileData.replace("]", "");
+  doComment(fileData);
 });
 
-function doComment(string){
-  fetch('https://hooks.zapier.com/hooks/catch/3022285/kbcwnf/silent/', {
+function doComment(data) {
+  /*fetch('https://hooks.zapier.com/hooks/catch/3022285/kbcwnf/silent/', {
     method: "POST",
     body: string
   })
     .then(res => res.json())
-    .then(json => console.log(json));
+    .then(json => console.log(json));*/
+    var final_obj = { "body" : data}
+    console.log(final_obj)
+
+  fetch(
+    "https://requestb.in/qqq9n6qq",
+    {
+      method: "POST",
+      body: final_obj,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "token 123123123123"
+      }
+    }
+  )
+    .then(function(res) {
+      return res.text();
+    })
+    .then(function(body) {
+      var output = { id: 1234, rawHTML: body };
+      callback(null, output);
+    })
+    .catch(callback);
 }
