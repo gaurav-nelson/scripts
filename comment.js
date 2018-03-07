@@ -29,7 +29,7 @@ function doComment(data) {
   })
     .then(res => res.json())
     .then(json => console.log(json));*/
-  var final_obj = { body: data };
+  var final_obj = { "body": data };
   console.log(final_obj);
 
   fetch("https://requestb.in/qqq9n6qq", {
@@ -40,6 +40,6 @@ function doComment(data) {
       Authorization: "token 123123123123"
     }
   })
-    .then(res => res.json())
-    .then(json => console.log(json));
+  .then(res => res.text())
+	.then(body => console.log(body));
 }
