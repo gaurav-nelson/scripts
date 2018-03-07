@@ -38,7 +38,7 @@ if (int_xrefs[0] != null) {
         filenamelisted = true;
       }
       console.log(
-        "\x1b[31m[X]\x1b[0m External reference missing '.adoc' file extension: \x1b[36m%s\x1b[0m",
+        "[X] External reference missing .adoc file extension: %s",
         internal_xref
       );
     } else {
@@ -49,7 +49,7 @@ if (int_xrefs[0] != null) {
           filenamelisted = true;
         }
         console.log(
-          "\x1b[31m[X]\x1b[0m Missing 'Anchor' for the internal reference: \x1b[36m%s\x1b[0m",
+          "[X] Cannot find the anchor for the internal reference: %s",
           internal_xref
         );
       }
@@ -74,8 +74,12 @@ if (ext_xrefs[0] != null) {
           console.log("FILE: ", args[2]);
           filenamelisted = true;
         }
-        console.log("\x1b[31m[X]\x1b[0m Missing the 'anchor': \x1b[36m%s\x1b[0m", currentLink);
-        console.log("in file: \x1b[33m%s\x1b[0m", fullFilePath);
+        console.log(
+          "[X] Cannot find the anchor: " +
+            currentLink +
+            " in file: " +
+            fullFilePath
+        );
       }
     } catch (err) {
       if (err.code === "ENOENT") {
@@ -83,9 +87,10 @@ if (ext_xrefs[0] != null) {
           console.log("FILE: ", args[2]);
           filenamelisted = true;
         }
-        console.log("\x1b[31m[X]\x1b[0m Cannot find the file: ", fullFilePath);
         console.log(
-          "Are you using the relative file path? (from the file you are editing, to the file you are linking to)"
+          "[X] Cannot find the file: " +
+            fullFilePath +
+            "Are you using the relative file path? (from the file you are editing, to the file you are linking to)."
         );
       } else {
         console.log(err);

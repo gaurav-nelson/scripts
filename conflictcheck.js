@@ -34,8 +34,7 @@ reader.on("end", function() {
     console.log("FILE: ", asciidocFile);
     collection.forEach(item => {
       console.log(
-        "[X] " +
-          "Please remove the conflict marker " +
+          "[X] Please remove the conflict marker " +
           item.conflict +
           " from line: " +
           item.onLineNumber

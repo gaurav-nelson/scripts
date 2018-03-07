@@ -39,7 +39,7 @@ cleanedLinks.forEach(function(link) {
         filenamelisted = true;
       }
       console.log(
-        `\x1b[31m[X]\x1b[0m ${result.link}`
+        `[X] ${result.link} is dead.`
       );
     }
   });
