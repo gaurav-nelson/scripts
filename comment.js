@@ -32,7 +32,7 @@ function doComment(data) {
   var final_obj = { "body": data };
   console.log(final_obj);
 
-  fetch("https://hooks.zapier.com/hooks/catch/3022285/kbcwnf/silent/", {
+  fetch("https://hooks.zapier.com/hooks/catch/3022285/kuur6r/silent/", {
     method: "POST",
     body: final_obj,
     headers: {
