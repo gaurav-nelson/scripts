@@ -7,6 +7,18 @@ var fetch = require("node-fetch");
 var fileData = [];
 var i;
 
+//escape function
+String.prototype.escapeSpecialChars = function() {
+  return this.replace(/\\n/g, "\\n")
+    .replace(/\\'/g, "\\'")
+    .replace(/\\"/g, '\\"')
+    .replace(/\\&/g, "\\&")
+    .replace(/\\r/g, "\\r")
+    .replace(/\\t/g, "\\t")
+    .replace(/\\b/g, "\\b")
+    .replace(/\\f/g, "\\f");
+};
+
 var url =
   "https://api.github.com/repos/" +
   process.env.BASE_REPO +
@@ -18,9 +30,7 @@ var token_data = "token " + process.env.GITHUB_TOKEN;
 fs.readFile("_external.txt", function(err, data) {
   if (err) throw err;
   fileData = data.toString();
-  fileData.replace("\n", "\\n");
   doComment(fileData);
-  console.log(fileData)
 });
 
 function doComment(data) {
@@ -30,17 +40,22 @@ function doComment(data) {
   })
     .then(res => res.json())
     .then(json => console.log(json));*/
-  var final_obj = { "body": data };
-  console.log(final_obj);
+  var final_obj = { body: data };
+  console.log("FINAL OBJ: ", final_obj);
+
+  var myJSONstring = JSON.stringify(final_obj);
+  var escapedString = myJSONstring.escapeSpecialChars();
+
+  console.log("ESCAPED: ", escapedString);
 
   fetch(url, {
     method: "POST",
-    body: final_obj,
+    body: escapedString,
     headers: {
       "Content-Type": "application/json",
       Authorization: token_data
     }
   })
-  .then(res => res.text())
-	.then(body => console.log(body));
+    .then(res => res.text())
+    .then(body => console.log(body));
 }
