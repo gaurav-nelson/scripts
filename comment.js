@@ -7,19 +7,20 @@ var fetch = require("node-fetch");
 var fileData = [];
 var i;
 
-/*var url =
+var url =
   "https://api.github.com/repos/" +
   process.env.BASE_REPO +
   "/issues/" +
   process.env.PR_NUMBER +
   "/comments";
-var token_data = "token " + process.env.GITHUB_TOKEN;*/
+var token_data = "token " + process.env.GITHUB_TOKEN;
 
 fs.readFile("_external.txt", function(err, data) {
   if (err) throw err;
   fileData = data.toString();
   fileData.replace("\n", "\\n");
   doComment(fileData);
+  console.log(fileData)
 });
 
 function doComment(data) {
@@ -32,12 +33,12 @@ function doComment(data) {
   var final_obj = { "body": data };
   console.log(final_obj);
 
-  fetch("https://hooks.zapier.com/hooks/catch/3022285/kuur6r/silent/", {
+  fetch(url, {
     method: "POST",
     body: final_obj,
     headers: {
       "Content-Type": "application/json",
-      Authorization: "token 123123123123"
+      Authorization: token_data
     }
   })
   .then(res => res.text())
