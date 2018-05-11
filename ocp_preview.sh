@@ -7,6 +7,9 @@ wget https://raw.githubusercontent.com/gaurav-nelson/scripts/master/_previewpage
 # Copy preview page into the _preview folder
 cp --verbose _previewpage _preview/index.html
 
+# list variables
+echo $CONTEXT$REVIEW_ID
+
 # Replace path name in _preview directory
 find . -depth -name '(HEAD detached at FETCH_HEAD)' -execdir bash -c 'mv "$0" "${0//(HEAD detached at FETCH_HEAD)/preview}"' {} \;
 
