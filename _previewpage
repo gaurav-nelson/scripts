@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <title>OpenShift Docs PR Review</title>
     <link href="https://assets.openshift.net/content/subdomain.css" rel="stylesheet" media="screen, print">
-    <link href="/openshift-enterprise/master/_stylesheets/commercial-home.css" rel="stylesheet">
+    <link href="/openshift-enterprise/(head detached at fetch_head)/_stylesheets/commercial-home.css" rel="stylesheet">
     <header class="masthead masthead-docs text-center">
         <div class="container">
             <div class="title-inner">
@@ -24,7 +24,7 @@
                             <h2>OpenShift Online</h2>
                             <div class="list-group">
                                 <p>
-                                    <a role="button" class="btn btn-primary" href="/openshift-online/master/welcome/index.html">
+                                    <a role="button" class="btn btn-primary" href="/openshift-online/(head detached at fetch_head)/welcome/index.html">
                                         <i class="fa fa-arrow-circle-o-right"></i> Online</a>
                                 </p>
                                 <p class="list-group-item-text">Red Hat's public cloud application deployment and hosting platform.</p>
@@ -35,7 +35,7 @@
                             <h2>OpenShift Container Platform</h2>
                             <div class="list-group">
                                 <p>
-                                    <a role="button" class="btn btn-primary" href="/openshift-enterprise/master/welcome/index.html">
+                                    <a role="button" class="btn btn-primary" href="/openshift-enterprise/(head detached at fetch_head)/welcome/index.html">
                                         <i class="fa fa-arrow-circle-o-right"></i> Enterprise</a>
                                 </p>
                                 <p class="list-group-item-text">Red Hat's private, on-premise cloud application deployment and hosting platform.</p>
@@ -46,7 +46,7 @@
                             <h2>OpenShift Dedicated</h2>
                             <div class="list-group">
                                 <p>
-                                    <a role="button" class="btn btn-primary" href="/openshift-dedicated/master/welcome/index.html">
+                                    <a role="button" class="btn btn-primary" href="/openshift-dedicated/(head detached at fetch_head)/welcome/index.html">
                                         <i class="fa fa-arrow-circle-o-right"></i> Dedicated</a>
                                 </p>
                                 <p class="list-group-item-text">Red Hat's managed public cloud application deployment and hosting service.</p>
@@ -57,7 +57,7 @@
                             <h2>OpenShift Origin</h2>
                             <div class="list-group">
                                 <p>
-                                    <a role="button" class="btn btn-primary" href="/openshift-origin/master/welcome/index.html">
+                                    <a role="button" class="btn btn-primary" href="/openshift-origin/(head detached at fetch_head)/welcome/index.html">
                                         <i class="fa fa-arrow-circle-o-right"></i> Origin</a>
                                 </p>
                                 <p class="list-group-item-text">OpenShift's open source, upstream project.</p>
