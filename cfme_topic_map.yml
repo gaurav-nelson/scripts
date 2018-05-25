@@ -311,137 +311,62 @@ Topics:
       - Name: Create multiple Automation Requests
         File: automation_requests
 ---
-Name: Installing ManageIQ on Google Compute Engine
+Name: Installing CloudForms on Google Compute Engine
 Dir: doc-Installing_on_Google_Compute_Engine
-Topics:
-  - Name: Table of Contents
-    Dir: cfme
-    Topics:
-    - Name: Index
-      File: master
+File: master
 ---
-Name: Installing ManageIQ on Microsoft Azure
+Name: Installing CloudForms on Microsoft Azure
 Dir: doc-Installing_on_Microsoft_Azure
-Topics:
-  - Name: Table of Contents
-    Dir: cfme
-    Topics:
-    - Name: Index
-      File: master
+File: master
 ---
-Name: Installing ManageIQ on Red Hat Enterprise Linux OpenStack Platform
+Name: Installing CloudForms on Red Hat Enterprise Linux OpenStack Platform
 Dir: doc-Installing_on_Red_Hat_Enterprise_Linux_OpenStack_Platform
-Topics:
-  - Name: Table of Contents
-    Dir: cfme
-    Topics:
-    - Name: Index
-      File: master
+File: master
 ---
-Name: Installing ManageIQ on Red Hat Virtualization
+Name: Installing CloudForms on Red Hat Virtualization
 Dir: doc-Installing_on_Red_Hat_Virtualization
-Topics:
-  - Name: Table of Contents
-    Dir: cfme
-    Topics:
-    - Name: Index
-      File: master
+File: master
 ---
 Name: Integration with AWS CloudFormation and OpenStack Heat
 Dir: doc-Integration_with_AWS_CloudFormation_and_OpenStack_Heat
-Topics:
-  - Name: Table of Contents
-    Dir: cfme
-    Topics:
-    - Name: Index
-      File: master
+File: master
 ---
 Name: Integration with ServiceNow
 Dir: doc-Integration_with_ServiceNow
-Topics:
-  - Name: Table of Contents
-    Dir: cfme
-    Topics:
-    - Name: Index
-      File: master
+File: master
 ---
 Name: Introduction to the Self-Service Portal
 Dir: doc-Introduction_to_Self_Service_Portal
-Topics:
-  - Name: Table of Contents
-    Dir: cfme
-    Topics:
-    - Name: Index
-      File: master
+File: master
 ---
 Name: Managing Infrastructure and Inventory
 Dir: doc-Managing_Infrastructure_and_Inventory
-Topics:
-  - Name: Table of Contents
-    Dir: cfme
-    Topics:
-    - Name: Index
-      File: master
+File: master
 ---
 Name: Managing Providers
 Dir: doc-Managing_Providers
-Topics:
-  - Name: Table of Contents
-    Dir: cfme
-    Topics:
-    - Name: Index
-      File: master
+File: master
 ---
 Name: Methods Available for Automation
 Dir: doc-Methods_Available_for_Automation
-Topics:
-  - Name: Table of Contents
-    Dir: cfme
-    Topics:
-    - Name: Index
-      File: master
+File: master
 ---
 Name: Monitoring, Alerts, and Reporting
 Dir: doc-Monitoring_Alerts_and_Reporting
-Topics:
-  - Name: Table of Contents
-    Dir: cfme
-    Topics:
-    - Name: Index
-      File: master
+File: master
 ---
 Name: Policies and Profiles Guide
 Dir: doc-Policies_and_Profiles_Guide
-Topics:
-  - Name: Table of Contents
-    Dir: cfme
-    Topics:
-    - Name: Index
-      File: master
+File: master
 ---
 Name: Provisioning Virtual Machines and Hosts
 Dir: doc-Provisioning_Virtual_Machines_and_Hosts
-Topics:
-  - Name: Table of Contents
-    Dir: cfme
-    Topics:
-    - Name: Index
-      File: master
+File: master
 ---
-Name: ManageIQ REST API
+Name: CloudForms REST API
 Dir: doc-REST_API
-Topics:
-  - Name: Table of Contents
-    Dir: cfme
-    Topics:
-    - Name: Index
-      File: master
+File: master
 ---
-Name: Scripting Actions in ManageIQ
+Name: Scripting Actions in CloudForms
 Dir: doc-Scripting_Actions
-Topics:
-  - Name: Table of Contents
-    Dir: cfme
-    Topics:
-    - Name: Index
-      File: master
+File: master
