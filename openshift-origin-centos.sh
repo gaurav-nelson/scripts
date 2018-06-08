@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 echo -e "\e[33m==== Installing OpenShift Origin v3.9.0--191 locally ====\e[0m"
 echo -e "\e[33m= Installing Docker... =\e[0m"
 yum install docker -y
@@ -33,4 +34,4 @@ echo -e "\e[33m= Version Information =\e[0m"
 docker version
 oc version
 echo -e "\e[32mDONE!\e[0m"
-echo -e "Run \e[32moc cluster up \e[0m to start OpenShift"
+echo -e "Run \e[32moc cluster up \e[0m to start OpenShift. Don't forget to run \e[32moc cluster down \e[0m once you are done."
