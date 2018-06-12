@@ -7,7 +7,7 @@ yum update -y
 echo -e "\e[33m= Downloading OpenShift Origin CLient Tools... =\e[0m"
 wget https://github.com/openshift/origin/releases/download/v3.9.0/openshift-origin-client-tools-v3.9.0-191fece-linux-64bit.tar.gz
 echo -e "\e[33m= Extracting OpenShift Origin CLient Tools... =\e[0m"
-tar -xzf openshift-origin-client-tools-v3.9.0-191fece-linux-64bit.tar.gz && echo -e "\e[33m= Adding OpenShift Origin CLient Tools binary to path... =\e[0m" && echo $(PATH=$PATH:~/openshift-origin-client-tools-v3.9.0-191fece-linux-64bit/)
+tar -xzf openshift-origin-client-tools-v3.9.0-191fece-linux-64bit.tar.gz && echo -e "\e[33m= Adding OpenShift Origin CLient Tools binary to path... =\e[0m" && PATH=$PATH:~/openshift-origin-client-tools-v3.9.0-191fece-linux-64bit/
 echo -e "\e[33m= Enabling Docker... =\e[0m"
 systemctl enable docker && systemctl start docker
 echo -e "\e[33m= Updating Docker configuration... =\e[0m"
