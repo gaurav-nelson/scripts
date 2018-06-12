@@ -7,22 +7,19 @@ yum update -y
 echo -e "\e[33m= Downloading OpenShift Origin CLient Tools... =\e[0m"
 wget https://github.com/openshift/origin/releases/download/v3.9.0/openshift-origin-client-tools-v3.9.0-191fece-linux-64bit.tar.gz
 echo -e "\e[33m= Extracting OpenShift Origin CLient Tools... =\e[0m"
-tar -xzf openshift-origin-client-tools-v3.9.0-191fece-linux-64bit.tar.gz
-echo -e "\e[33m= Adding OpenShift Origin CLient Tools binary to path... =\e[0m"
-echo $(PATH=$PATH:~/openshift-origin-client-tools-v3.9.0-191fece-linux-64bit/)
+tar -xzf openshift-origin-client-tools-v3.9.0-191fece-linux-64bit.tar.gz && echo -e "\e[33m= Adding OpenShift Origin CLient Tools binary to path... =\e[0m" && echo $(PATH=$PATH:~/openshift-origin-client-tools-v3.9.0-191fece-linux-64bit/)
 echo -e "\e[33m= Enabling Docker... =\e[0m"
-systemctl enable docker
-systemctl start docker
+systemctl enable docker && systemctl start docker
 echo -e "\e[33m= Updating Docker configuration... =\e[0m"
-cat << EOF > /etc/docker/daemon.json {
+cat << EOF > /etc/docker/daemon.json 
+{
    "insecure-registries": [
      "172.30.0.0/16"
    ]
 }
 EOF
 echo -e "\e[33m= Restarting Docker... =\e[0m"
-systemctl daemon-reload
-systemctl restart docker
+systemctl daemon-reload && systemctl restart docker
 echo -e "\e[33m= Updating firewall configuration... =\e[0m"
 firewall-cmd --permanent --new-zone dockerc
 firewall-cmd --permanent --zone dockerc --add-source 172.17.0.0/16
