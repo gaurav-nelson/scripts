@@ -12,7 +12,7 @@ git config --global user.email "travis@travis-ci.org"
 git config --global user.name "Travis CI"
 
 echo "CHECKING IF BRANCH ALREADY EXIST"
-if [[ $(git ls-remote --heads git@github.com:openshift-docs-preview-bot/openshift-docs.git "$PR_BRANCH") ]]; then
+if [[ $(git ls-remote --heads https://"${GH_TOKEN}"@github.com:openshift-docs-preview-bot/openshift-docs.git "$PR_BRANCH") ]]; then
     echo "Branch exist."
     BRANCH_ALREADY_EXIST=true
 else
