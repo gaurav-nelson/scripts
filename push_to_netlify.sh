@@ -47,7 +47,7 @@ if [ "$BRANCH_ALREADY_EXIST" = false] ; then
 
     echo "ADDING COMMENT on PR"
     COMMENT_DATA="The preview build for this PR is available at https://${PR_BRANCH}--ocpdocs.netlify.com/"
-    curl -H "Authorization: token ${GH_TOKEN}" -X POST -d "{\"body\": \"${COMMENT_DATA}\"}" "https://api.github.com/repos/${BASE_REPO}/issues/${PR_NUMBER}/comments"!'
+    curl -H "Authorization: token ${GH_TOKEN}" -X POST -d "{\"body\": \"${COMMENT_DATA}\"}" "https://api.github.com/repos/${BASE_REPO}/issues/${PR_NUMBER}/comments"
 fi
 
 echo "DONE!"
