@@ -1,7 +1,8 @@
 #!/bin/bash
 set -ev
 
-BRANCH_ALREADY_EXIST=false
+PREVIEW_URL=https://${PR_BRANCH}--ocpdocs.netlify.com
+NEW_BRANCH=''
 
 echo "RESETTING REMOTES"
 git remote rm origin
@@ -10,14 +11,6 @@ git remote add origin https://"${GH_TOKEN}"@github.com/openshift-docs-preview-bo
 echo "SETTING GIT USER"
 git config --global user.email "travis@travis-ci.org"
 git config --global user.name "Travis CI"
-
-echo "CHECKING IF BRANCH ALREADY EXIST"
-if [[ $(git ls-remote --heads https://"${GH_TOKEN}"@github.com:openshift-docs-preview-bot/openshift-docs.git "$PR_BRANCH") ]]; then
-    echo "Branch exist."
-    BRANCH_ALREADY_EXIST=true
-else
-    echo "Branch does not exist."
-fi
 
 #set the remote to user repository
 echo "SETTING REMOTE FOR $REPO_NAME:$PR_BRANCH"
@@ -41,12 +34,44 @@ git branch -m "$PR_BRANCH"
 echo "PUSHING TO GITHUB"
 git push origin -f "$PR_BRANCH" --quiet
 
-if [ "$BRANCH_ALREADY_EXIST" = false ] ; then
-    echo "WAITING FOR NETLIFY BUILD"
-    sleep 120
+echo "CHECKING IF BRANCH ALREADY EXIST"
+if curl --output /dev/null --silent --head --fail "$PREVIEW_URL"; then
+  echo "Branch exists."
+  NEW_BRANCH=false
+else
+  echo "Branch does not exist"
+  NEW_BRANCH=true
+fi
+
+if [[ "$NEW_BRANCH" = true ]]; then
+    echo "FINDING MODIFIED FILES"
+    #COMMIT_HASH="$(git rev-parse @~)"
+    COMMITS_IN_PR=$(git rev-list --count HEAD ^master)
+    #FILE_ARRAY=( $(git diff --name-only $COMMIT_HASH) )
+    FILES_CHANGED=$(git diff --name-only HEAD HEAD~"${COMMITS_IN_PR}")
+    COMMENT_DATA1='The preview of modified files will be availble at: \n'
+    COMMENT_DATA2=''
+    
+    for i in "${FILES_CHANGED[@]}"
+    do
+        if [ "${i: -5}" == ".adoc" ] ; then
+            FILE_NAME="${i::-4}"
+            CHECK_DOCS_URL="https://docs.openshift.com/container-platform/3.9/$FILE_NAME.html"
+            if curl --output /dev/null --silent --head --fail "$CHECK_DOCS_URL"; then
+                FINAL_URL="https://${PR_BRANCH}--ocpdocs.netlify.com/openshift-enterprise/(head detached at fetch_head)/$FILE_NAME.html"
+                COMMENT_DATA2="${COMMENT_DATA2}${FINAL_URL}\\n"
+            fi
+        fi
+    done
+    
 
     echo "ADDING COMMENT on PR"
-    COMMENT_DATA="The preview build for this PR is available at https://${PR_BRANCH}--ocpdocs.netlify.com/"
+    if [ -z "$COMMENT_DATA2" ]
+        then
+            COMMENT_DATA="${COMMENT_DATA1}https://${PR_BRANCH}--ocpdocs.netlify.com/"
+        else
+            COMMENT_DATA="${COMMENT_DATA1}${COMMENT_DATA2}"
+    fi
     curl -H "Authorization: token ${GH_TOKEN}" -X POST -d "{\"body\": \"${COMMENT_DATA}\"}" "https://api.github.com/repos/${BASE_REPO}/issues/${PR_NUMBER}/comments"
 fi
 
