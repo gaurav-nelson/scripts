@@ -46,14 +46,17 @@
     if [[ "$NEW_BRANCH" = true ]]; then
         echo "FINDING MODIFIED FILES"
         COMMIT_HASH="$(git rev-parse @~)"
+        echo -e "\033[31m COMMIT HASH: $COMMIT_HASH"
         #COMMITS_IN_PR=$(git rev-list --count HEAD ^master)
         FILES_CHANGED=( $(git diff --name-only $COMMIT_HASH) )
+        echo -e "\033[31m FILES CHANGED: $FILES_CHANGED"
         #FILES_CHANGED=$(git diff --name-only HEAD HEAD~"${COMMITS_IN_PR}")
         COMMENT_DATA1='The preview of modified files will be availble at: \n'
         COMMENT_DATA2=''
         
         for i in "${FILES_CHANGED[@]}"
         do
+            echo -e "\033[31m FILE NAME: $i"
             if [ "${i: -5}" == ".adoc" ] ; then
                 FILE_NAME="${i::-4}"
                 CHECK_DOCS_URL="https://docs.openshift.com/container-platform/3.9/$FILE_NAME.html"
@@ -63,6 +66,7 @@
                 fi
             fi
         done
+        echo -e "\033[31m COMMENT DATA2: $COMMENT_DATA2"
         
 
         echo "ADDING COMMENT on PR"
@@ -72,7 +76,8 @@
             else
                 COMMENT_DATA="${COMMENT_DATA1}${COMMENT_DATA2}"
         fi
-        curl -H "Authorization: token ${GH_TOKEN}" -X POST -d "{\"body\": \"${COMMENT_DATA}\"}" "https://api.github.com/repos/${BASE_REPO}/issues/${PR_NUMBER}/comments"
+        #curl -H "Authorization: token ${GH_TOKEN}" -X POST -d "{\"body\": \"${COMMENT_DATA}\"}" "https://api.github.com/repos/${BASE_REPO}/issues/${PR_NUMBER}/comments"
+        echo -e "\033[31m COMMENT DATA: $COMMENT_DATA"
     fi
 
     echo "DONE!"
