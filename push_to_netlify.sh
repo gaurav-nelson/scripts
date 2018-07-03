@@ -72,9 +72,9 @@ if [[ "$NEW_BRANCH" = true ]]; then
                     if [[ ${i} != *"topic"* || ${i} != *"module"* ]] ; then
                         FILE_NAME="${i::-5}"
                         CHECK_DOCS_URL="https://docs.openshift.com/container-platform/3.9/$FILE_NAME.html"
-                        if curl --output /dev/null --head --fail "$CHECK_DOCS_URL"; then
-                            FINAL_URL="https://${PR_BRANCH}--ocpdocs.netlify.com/openshift-enterprise/(head detached at fetch_head)/$FILE_NAME.html"
-                            COMMENT_DATA2="- $i: ${COMMENT_DATA2}${FINAL_URL}\\n"
+                        if curl --output /dev/null --silent --head --fail "$CHECK_DOCS_URL"; then
+                            FINAL_URL="https://${PR_BRANCH}--ocpdocs.netlify.com/openshift-enterprise/(head%20detached%20at%20fetch_head)/$FILE_NAME.html"
+                            COMMENT_DATA2="- *$i*: ${COMMENT_DATA2}${FINAL_URL}\\n"
                         fi
                     fi
                 fi
