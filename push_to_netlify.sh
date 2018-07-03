@@ -43,7 +43,7 @@
     NEW_BRANCH=true
     fi
 
-    if [[ "$NEW_BRANCH" = true ]]; then
+    #if [[ "$NEW_BRANCH" = true ]]; then
         echo "FINDING MODIFIED FILES"
         COMMIT_HASH="$(git rev-parse @~)"
         echo -e "\033[31m COMMIT HASH: $COMMIT_HASH"
@@ -78,6 +78,6 @@
         fi
         #curl -H "Authorization: token ${GH_TOKEN}" -X POST -d "{\"body\": \"${COMMENT_DATA}\"}" "https://api.github.com/repos/${BASE_REPO}/issues/${PR_NUMBER}/comments"
         echo -e "\033[31m COMMENT DATA: $COMMENT_DATA"
-    fi
+    #fi
 
     echo "DONE!"
