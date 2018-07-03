@@ -59,12 +59,15 @@
             echo -e "\033[31m FILE NAME: $i"
             if [ "${i: -5}" == ".adoc" ] ; then
                 echo  -e "\033[32m I am in!"
-                FILE_NAME="${i::-4}"
+                FILE_NAME="${i::-5}"
                 echo  -e "\033[32m NEW FILE NAME: $FILE_NAME.html"
                 CHECK_DOCS_URL="https://docs.openshift.com/container-platform/3.9/$FILE_NAME.html"
-                if curl --output /dev/null --silent --head --fail "$CHECK_DOCS_URL"; then
+                echo  -e "\033[32m CHECK URL: $CHECK_DOCS_URL"
+                if curl --output /dev/null --head --fail "$CHECK_DOCS_URL"; then
+                    echo  -e "\033[33m CHECK URL: $CHECK_DOCS_URL"
                     FINAL_URL="https://${PR_BRANCH}--ocpdocs.netlify.com/openshift-enterprise/(head detached at fetch_head)/$FILE_NAME.html"
                     COMMENT_DATA2="${COMMENT_DATA2}${FINAL_URL}\\n"
+                    echo -e "\033[33m COMMENT DATA2: $COMMENT_DATA2"
                 fi
             fi
         done
