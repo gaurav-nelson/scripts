@@ -75,7 +75,7 @@ fi
                         if curl --output /dev/null --silent --head --fail "$CHECK_DOCS_URL"; then
                             FINAL_URL="https://${PR_BRANCH}--ocpdocs.netlify.com/openshift-enterprise/(head%20detached%20at%20fetch_head)/$FILE_NAME.html"
                             #COMMENT_DATA2="- *$i*: ${COMMENT_DATA2}${FINAL_URL}\\n"
-                            echo "- *$i*: ${COMMENT_DATA2}${FINAL_URL}\\n" >> comments.txt
+                            echo "- *$i*: ${FINAL_URL}\\n" >> comments.txt
                         fi
                     fi
                 fi
