@@ -49,7 +49,7 @@ if curl --output /dev/null --silent --head --fail "$PREVIEW_URL"; then
     NEW_BRANCH=true
 fi
 
-#if [[ "$NEW_BRANCH" = true ]]; then
+if [[ "$NEW_BRANCH" = true ]]; then
     echo -e "${YELLOW}FINDING MODIFIED FILES${NC}"
     COMMIT_HASH="$(git rev-parse @~)"
     #COMMITS_IN_PR=$(git rev-list --count HEAD ^master)
@@ -75,7 +75,7 @@ fi
                         if curl --output /dev/null --silent --head --fail "$CHECK_DOCS_URL"; then
                             FINAL_URL="https://${PR_BRANCH}--ocpdocs.netlify.com/openshift-enterprise/(head%20detached%20at%20fetch_head)/$FILE_NAME.html"
                             #COMMENT_DATA2="- *$i*: ${COMMENT_DATA2}${FINAL_URL}\\n"
-                            echo "- *$i*: ${FINAL_URL}\\n" >> comments.txt
+                            echo "- *$i*: ${FINAL_URL}" >> comments.txt
                         fi
                     fi
                 fi
@@ -83,14 +83,15 @@ fi
     fi
         
     echo -e "${YELLOW}ADDING COMMENT on PR${NC}"
+    #if there is a comment file show individual file URLs otherwise show the main URL
     if [ ! -f comments.txt ]; then
 	    COMMENT_DATA="${COMMENT_DATA1}- https://${PR_BRANCH}--ocpdocs.netlify.com/"
     else
-	    COMMENT_DATA2=`cat comments.txt`
+	    COMMENT_DATA2=$(cat comments.txt)
 	    COMMENT_DATA="${COMMENT_DATA1}${COMMENT_DATA2}"
     fi
-    #curl -H "Authorization: token ${GH_TOKEN}" -X POST -d "{\"body\": \"${COMMENT_DATA}\"}" "https://api.github.com/repos/${BASE_REPO}/issues/${PR_NUMBER}/comments"
-    echo -e "\033[31m COMMENT DATA: $COMMENT_DATA"
-#fi
+    curl -H "Authorization: token ${GH_TOKEN}" -X POST -d "{\"body\": \"${COMMENT_DATA}\"}" "https://api.github.com/repos/${BASE_REPO}/issues/${PR_NUMBER}/comments"
+    #echo -e "\033[31m COMMENT DATA: $COMMENT_DATA"
+fi
 
 echo -e "${GREEN}DONE!${NC}"
