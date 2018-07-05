@@ -2,19 +2,19 @@
 set -ev
 
 COMMIT_HASH="$(git rev-parse @~)" #get the previous commit hash 
-git diff --name-only $COMMIT_HASH
+git diff --name-only "$COMMIT_HASH"
 
 for i in $(git diff --name-only "${COMMIT_HASH}") ; do
   fileList[$N]="$i"
   if [ "${i: -5}" == ".adoc" ] ; then
-    echo -e "\e[32mCHECKING REFERENCES for ${i}\e[0m"
-    $(node checkrefs.js ${i}) >> references.txt
+    echo -e "CHECKING REFERENCES for ${i}"
+    node checkrefs.js "${i}" >> references.txt
     echo $'\n'
     (( N= $N + 1 ))
   fi
 done
 
-COMMENT_DATA1="Please verify following reference errors: \n"
+COMMENT_DATA1="Please verify following reference errors: \\n"
 
 if [ -f references.txt ]; then
   COMMENT_DATA2=$(cat references.txt)
