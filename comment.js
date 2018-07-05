@@ -25,9 +25,9 @@ var url =
   "/issues/" +
   process.env.PR_NUMBER +
   "/comments";
-var token_data = "token " + process.env.GITHUB_TOKEN;
+var token_data = "token " + process.env.GH_LINKCHECK_TOKEN;
 
-fs.readFile("_external.txt", function(err, data) {
+fs.readFile("references.txt", function(err, data) {
   if (err) throw err;
   fileData = data.toString();
   doComment(fileData);
