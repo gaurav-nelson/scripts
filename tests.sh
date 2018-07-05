@@ -1,23 +1,23 @@
 #!/bin/bash
 set -ev
 
-touch _external.txt
-touch _internal.txt
-touch _blocks.txt
-
 COMMIT_HASH="$(git rev-parse @~)" #get the previous commit hash 
 git diff --name-only $COMMIT_HASH
 
 for i in $(git diff --name-only "${COMMIT_HASH}") ; do
   fileList[$N]="$i"
-  echo -e "\e[32mHYPERLINKS CHECK\e[0m"
-  echo "$(node linkcheck.js $i)" &>> _external.txt
-  echo -e "\e[32mXREFS CHECK\e[0m"
-  echo "$(node xrefcheck.js $i)" &>> _internal.txt
-  echo -e "\e[32mBLOCK CHECK\e[0m"
-  echo "$(node blockcheck.js $i)" &>> _blocks.txt
-  echo $'\n'
-  (( N= $N + 1 ))
+  if [ "${i: -5}" == ".adoc" ] ; then
+    echo -e "\e[32mCHECKING REFERENCES for ${i}\e[0m"
+    $(node checkrefs.js ${i}) >> references.txt
+    echo $'\n'
+    (( N= $N + 1 ))
+  fi
 done
 
+COMMENT_DATA1="Please verify following reference errors: \n"
 
+if [ -f references.txt ]; then
+  COMMENT_DATA2=$(cat references.txt)
+  COMMENT_DATA="${COMMENT_DATA1}${COMMENT_DATA2}"
+  curl -H "Authorization: token ${GH_LINKCHECK_TOKEN}" -X POST -d "{\"body\": \"${COMMENT_DATA}\"}" "https://api.github.com/repos/${BASE_REPO}/issues/${PR_NUMBER}/comments"
+fi
