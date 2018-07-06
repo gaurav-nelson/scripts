@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 echo -e "\e[33m==== Installing OpenShift Origin v3.9.0--191 locally ====\e[0m"
 echo -e "\e[33m= Installing Docker... =\e[0m"
-yum install docker -y
+yum install git docker -y
 echo -e "\e[33m= Updating installed packages... =\e[0m"
 yum update -y
 echo -e "\e[33m= Downloading OpenShift Origin CLient Tools... =\e[0m"
