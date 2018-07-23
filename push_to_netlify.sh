@@ -10,6 +10,9 @@ BLUE='\033[0;34m'
 PREVIEW_URL=https://${PR_BRANCH}--ocpdocs.netlify.com
 NEW_BRANCH=''
 
+echo -e "${YELLOW}==== CURRENT BRANCH ====${NC}"
+git rev-parse --abbrev-ref HEAD
+
 echo -e "${YELLOW}==== RESETTING REMOTES ====${NC}"
 git remote rm origin
 git remote add origin https://"${GH_TOKEN}"@github.com/openshift-docs-preview-bot/openshift-docs.git > /dev/null 2>&1
@@ -17,6 +20,27 @@ git remote add origin https://"${GH_TOKEN}"@github.com/openshift-docs-preview-bo
 echo -e "${YELLOW}==== SETTING GIT USER ====${NC}"
 git config --global user.email "travis@travis-ci.org"
 git config --global user.name "Travis CI"
+
+echo -e "${YELLOW}==== SETTING UPSTREAM ====${NC}"
+git remote add upstream git://github.com/openshift/openshift-docs
+
+echo -e "${YELLOW}==== SETTING MASTER BRANCH ====${NC}"
+git fetch origin master
+git rev-parse master
+git fetch upstream master
+git rev-parse upstream/master
+
+if [ "$(git rev-parse master)" != "$(git rev-parse upstream/master)" ]
+then
+    echo -e "${YELLOW}==== PUSHING UPSTRAM CHANGES TO MASTER ====${NC}"
+    git stash
+    git checkout master
+    git fetch upstream master
+    git rebase upstream/master
+    git push -f origin master
+else
+    echo -e "${GREEN}==== MASTER UP TO DATE WITH UPSTREAM MASTER ====${NC}"
+fi
 
 #set the remote to user repository
 echo -e "${YELLOW}==== SETTING REMOTE FOR ${BLUE}$REPO_NAME:$PR_BRANCH${YELLOW} ====${NC}"
