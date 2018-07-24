@@ -7,7 +7,8 @@ GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 
-PREVIEW_URL=https://${PR_BRANCH}--ocpdocs.netlify.com
+UPDATED_BRANCH_NAME="${PR_BRANCH//./-}" #converts all dots to dashes in URL's (fixes incorrect URLs in comments)
+PREVIEW_URL=https://${UPDATED_BRANCH_NAME}--ocpdocs.netlify.com
 NEW_BRANCH=''
 
 echo -e "${YELLOW}==== CURRENT BRANCH ====${NC}"
