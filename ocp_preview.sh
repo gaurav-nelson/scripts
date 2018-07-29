@@ -16,5 +16,8 @@ cp --verbose robots.txt _preview/robots.txt
 # Rename (head detached at fetch_head) folder to latest
 find _preview/ -depth -name '*(HEAD detached at FETCH_HEAD)*' -execdir bash -c 'mv "$0" "${0//(HEAD detached at FETCH_HEAD)/latest}"' {} \;
 
+#Rename (head detached at fetch_head) to latest in all html files
+find _preview/ -type f -name '*.html' -exec sed -i 's/(HEAD detached at FETCH_HEAD)/latest/g' {} + ;
+
 # Show file paths
 find _preview/ -maxdepth 3
