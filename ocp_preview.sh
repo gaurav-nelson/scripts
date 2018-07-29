@@ -14,7 +14,7 @@ wget https://raw.githubusercontent.com/gaurav-nelson/scripts/master/robots.txt
 cp --verbose robots.txt _preview/robots.txt
 
 # Rename (head detached at fetch_head) folder to latest
-find _preview/ -depth -name '*(head detached at fetch_head)*' -execdir bash -c 'mv "$0" "${0//(head detached at fetch_head)/latest}"' {} \;
+find _preview/ -depth -name '*(HEAD detached at FETCH_HEAD)*' -execdir bash -c 'mv "$0" "${0//(HEAD detached at FETCH_HEAD)/latest}"' {} \;
 
 # Show file paths
 find _preview/ -maxdepth 3
