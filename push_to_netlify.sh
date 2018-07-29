@@ -98,7 +98,7 @@ if [[ "$NEW_BRANCH" = true ]]; then
                         FILE_NAME="${i::-5}"
                         CHECK_DOCS_URL="https://docs.openshift.com/container-platform/3.9/$FILE_NAME.html"
                         if curl --output /dev/null --silent --head --fail "$CHECK_DOCS_URL"; then
-                            FINAL_URL="https://${PR_BRANCH}--ocpdocs.netlify.com/openshift-enterprise/(head%20detached%20at%20fetch_head)/$FILE_NAME.html"
+                            FINAL_URL="https://${PR_BRANCH}--ocpdocs.netlify.com/openshift-enterprise/latest/$FILE_NAME.html"
                             #COMMENT_DATA2="- *$i*: ${COMMENT_DATA2}${FINAL_URL}\\n"
                             echo "- *$i*: ${FINAL_URL}" >> comments.txt
                         fi
