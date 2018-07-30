@@ -74,6 +74,20 @@ if curl --output /dev/null --silent --head --fail "$PREVIEW_URL"; then
     NEW_BRANCH=true
 fi
 
+echo -e "$YELLOW==== REMOVING TRAVIS CI BUILD ERROR COMMENTS IF ANY ====${NC}"
+COMMENTS_JSON=$(curl -H "Authorization: token ${GH_BOT_TOKEN}" "https://api.github.com/repos/${BASE_REPO}/issues/${PR_NUMBER}/comments" | jq '.')
+mapfile -t BOT_COMMENTS < <(echo "${COMMENTS_JSON}" | jq '.[] | select(.user.login=="openshift-docs-bot") | .url')
+
+if [ ${#BOT_COMMENTS[@]} -eq 0 ]; then
+    echo -e "${GREEN} No build failed comments.${NC}"
+else
+    for COMMENT_URL in "${BOT_COMMENTS[@]}"
+    do
+        curl -H "Authorization: token ${GH_BOT_TOKEN}" -X "DELETE" "${COMMENT_URL}"
+        echo -e "${GREEN} Deleted comment ${BLUE}${COMMENT_URL}${NC}"
+    done
+fi
+
 if [[ "$NEW_BRANCH" = true ]]; then
     echo -e "${YELLOW}FINDING MODIFIED FILES${NC}"
     COMMIT_HASH="$(git rev-parse @~)"
