@@ -91,9 +91,6 @@ fi
 echo -e "${YELLOW}==== FINDING MODIFIED FILES ====${NC}"
 COMMIT_HASH="$(git rev-parse @~)"
 mapfile -t FILES_CHANGED < <(git diff --name-only "$COMMIT_HASH")
-echo -e "${GREEN} CHANGED FILES: ${BLUE}"
-printf '%s\n' "${FILES_CHANGED[@]}"
-echo -e "${NC}\n"
 
 echo -e "${YELLOW}==== REFERENCE CHECK ====${NC}"
 for i in "${FILES_CHANGED[@]}"
@@ -101,7 +98,7 @@ for i in "${FILES_CHANGED[@]}"
                 #only do this for adoc files
                 if [ "${i: -5}" == ".adoc" ] ; then
                     echo -e "${BLUE}******** CHECKING REFERENCES for ${i} ********${NC}"
-                    node checkrefs.js
+                    node checkrefs.js "${i}"
                     echo $'******** DONE ********\n'
                 fi
             done
