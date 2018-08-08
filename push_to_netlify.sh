@@ -88,15 +88,25 @@ else
     done
 fi
 
+echo -e "${YELLOW}==== FINDING MODIFIED FILES ====${NC}"
+COMMIT_HASH="$(git rev-parse @~)"
+mapfile -t FILES_CHANGED < <(git diff --name-only "$COMMIT_HASH")
+echo -e "${GREEN} CHANGED FILES: ${BLUE}"
+printf '%s\n' "${FILES_CHANGED[@]}"
+echo -e "${NC}\n"
+
+echo -e "${YELLOW}==== REFERENCE CHECK ====${NC}"
+for i in "${FILES_CHANGED[@]}"
+            do
+                #only do this for adoc files
+                if [ "${i: -5}" == ".adoc" ] ; then
+                    echo -e "${BLUE}******** CHECKING REFERENCES for ${i} ********${NC}"
+                    node checkrefs.js
+                    echo $'******** DONE ********\n'
+                fi
+            done
+
 if [[ "$NEW_BRANCH" = true ]]; then
-    echo -e "${YELLOW}FINDING MODIFIED FILES${NC}"
-    COMMIT_HASH="$(git rev-parse @~)"
-    #COMMITS_IN_PR=$(git rev-list --count HEAD ^master)
-    #FILES_CHANGED=( $(git diff --name-only $COMMIT_HASH) )
-    mapfile -t FILES_CHANGED < <(git diff --name-only "$COMMIT_HASH")
-    echo -e "${GREEN} CHANGED FILES: ${BLUE}"
-    printf '%s\n' "${FILES_CHANGED[@]}"
-    echo -e "${NC}"
     #FILES_CHANGED=$(git diff --name-only HEAD HEAD~"${COMMITS_IN_PR}")
     COMMENT_DATA1='The preview will be availble shortly at: \n'
     COMMENT_DATA2=''
