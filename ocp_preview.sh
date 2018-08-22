@@ -19,5 +19,5 @@ find _preview/ -depth -name '*(HEAD detached at FETCH_HEAD)*' -execdir bash -c '
 #Rename (head detached at fetch_head) to latest in all html files
 find _preview/ -type f -name '*.html' -exec sed -i 's/(HEAD detached at FETCH_HEAD)/latest/g' {} + ;
 
-# Show file paths
-find _preview/ -maxdepth 3
+# Show file paths (uncomment for debug)
+# find _preview/ -maxdepth 3 
