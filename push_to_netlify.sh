@@ -136,8 +136,8 @@ if [[ "$NEW_BRANCH" = true ]]; then
 	    COMMENT_DATA2=$(cat comments.txt)
 	    COMMENT_DATA="${COMMENT_DATA1}${COMMENT_DATA2}"
     fi
+    echo -e "\033[31m COMMENT DATA: $COMMENT_DATA"
     curl -H "Authorization: token ${GH_TOKEN}" -X POST -d "{\"body\": \"${COMMENT_DATA}\"}" "https://api.github.com/repos/${BASE_REPO}/issues/${PR_NUMBER}/comments"
-    #echo -e "\033[31m COMMENT DATA: $COMMENT_DATA"
 fi
 
 echo -e "${GREEN}DONE!${NC}"
