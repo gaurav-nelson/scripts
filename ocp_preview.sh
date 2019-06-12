@@ -20,4 +20,4 @@ find _preview/ -depth -name '*(HEAD detached at FETCH_HEAD)*' -execdir bash -c '
 find _preview/ -type f -name '*.html' -exec sed -i 's/(HEAD detached at FETCH_HEAD)/latest/g' {} + ;
 
 # Show file paths (uncomment for debug)
-# find _preview/ -maxdepth 3 
+find _preview/ -maxdepth 3 
