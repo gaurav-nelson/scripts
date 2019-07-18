@@ -105,7 +105,7 @@ for i in "${FILES_CHANGED[@]}"
 
 if [[ "$NEW_BRANCH" = true ]]; then
     #FILES_CHANGED=$(git diff --name-only HEAD HEAD~"${COMMITS_IN_PR}")
-    COMMENT_DATA1='The preview will be availble shortly at: \n'
+    COMMENT_DATA1='The preview will be available shortly at: \n'
     COMMENT_DATA2=''
 
     #only list the individual urls if modified files is upto 5
