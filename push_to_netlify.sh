@@ -9,7 +9,7 @@ BLUE='\033[0;34m'
 
 UPDATED_BRANCH_NAME="${PR_BRANCH//./-}" #converts all dots to dashes in URL's (fixes incorrect URLs in comments)
 PREVIEW_URL=https://${UPDATED_BRANCH_NAME}--ocpdocs.netlify.com
-NEW_BRANCH=''
+COMMENT_FOUND=''
 
 echo -e "${YELLOW}==== CURRENT BRANCH ====${NC}"
 git rev-parse --abbrev-ref HEAD
@@ -82,10 +82,10 @@ mapfile -t PREVIEW_BOT_COMMENTS < <(curl https://api.github.com/repos/${BASE_REP
 
 if [[ " ${PREVIEW_BOT_COMMENTS[@]} " =~ "openshift-docs-preview-bot" ]]; then
     echo -e "${GREEN}Preview comment exists. No new comment on the PR.${NC}"
-    NEW_BRANCH=false
+    COMMENT_FOUND=true
 else
     echo -e "${GREEN}Preview comment does not exist. Add a new comment on the PR.${NC}"
-    NEW_BRANCH=true
+    COMMENT_FOUND=false
 fi
 
 echo -e "$YELLOW==== REMOVING TRAVIS CI BUILD ERROR COMMENTS IF ANY ====${NC}"
@@ -117,7 +117,7 @@ for i in "${FILES_CHANGED[@]}"
                 fi
             done
 
-if [[ "$NEW_BRANCH" = true ]]; then
+if [[ "$COMMENT_FOUND" = false ]]; then
     #FILES_CHANGED=$(git diff --name-only HEAD HEAD~"${COMMITS_IN_PR}")
     COMMENT_DATA1='The preview will be available shortly at: \n'
     COMMENT_DATA2=''
