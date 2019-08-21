@@ -76,10 +76,12 @@ git push origin -f "$PR_BRANCH" --quiet
 # fi
 # Updated logic below, it checks if there is already a comment from preview bot,
 
-echo -e "$YELLOW==== CHECKING PREVIEW BUILD COMMENTS ====${NC}"
+echo -e "${YELLOW}==== CHECKING PREVIEW BUILD COMMENTS ====${NC}"
 #get all users who commented in an array
 mapfile -t PREVIEW_BOT_COMMENTS < <(curl https://api.github.com/repos/${BASE_REPO}/issues/${PR_NUMBER}/comments | jq '.[].user.login' | tr -d '"')
-
+echo "-------------------------------------------------COMMENT AUTHOR-----------------------------------------------------"
+echo "${PREVIEW_BOT_COMMENTS}"
+echo "--------------------------------------------------------------------------------------------------------------------"
 if [[ " ${PREVIEW_BOT_COMMENTS[@]} " =~ "openshift-docs-preview-bot" ]]; then
     echo -e "${GREEN}Preview comment exists. No new comment on the PR.${NC}"
     COMMENT_FOUND=true
