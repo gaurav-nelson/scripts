@@ -65,12 +65,26 @@ git branch -m "$PR_BRANCH"
 echo -e "${YELLOW}==== PUSHING TO GITHUB ====${NC}"
 git push origin -f "$PR_BRANCH" --quiet
 
-echo -e "${YELLOW}==== CHECKING IF BRANCH ALREADY EXIST ====${NC}"
-if curl --output /dev/null --silent --head --fail "$PREVIEW_URL"; then
-    echo -e "${GREEN}Branch exists. No new comment on the PR.${NC}"
+# This logic fails when a user uses same branch names for different PRs
+# echo -e "${YELLOW}==== CHECKING IF BRANCH ALREADY EXIST ====${NC}"
+# if curl --output /dev/null --silent --head --fail "$PREVIEW_URL"; then
+#     echo -e "${GREEN}Branch exists. No new comment on the PR.${NC}"
+#     NEW_BRANCH=false
+#     else
+#     echo -e "${GREEN}Branch does not exist. Add a new comment on the PR.${NC}"
+#     NEW_BRANCH=true
+# fi
+# Updated logic below, it checks if there is already a comment from preview bot,
+
+echo -e "$YELLOW==== CHECKING PREVIEW BUILD COMMENTS ====${NC}"
+PREVIEW_COMMENTS_JSON=$(curl -H "Authorization: token ${GH_BOT_TOKEN}" "https://api.github.com/repos/${BASE_REPO}/issues/${PR_NUMBER}/comments" | jq '.')
+mapfile -t PREVIEW_BOT_COMMENTS < <(echo "${PREVIEW_COMMENTS_JSON}" | jq '.[] | select(.user.login=="openshift-docs-preview-bot") | .url')
+
+if [ ${#PREVIEW_BOT_COMMENTS[@]} -eq 0 ]; then
+    echo -e "${GREEN}Preview comment exists. No new comment on the PR.${NC}"
     NEW_BRANCH=false
-    else
-    echo -e "${GREEN}Branch does not exist. Add a new comment on the PR.${NC}"
+else
+    echo -e "${GREEN}Preview comment does not exist. Add a new comment on the PR.${NC}"
     NEW_BRANCH=true
 fi
 
