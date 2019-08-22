@@ -78,7 +78,7 @@ git push origin -f "$PR_BRANCH" --quiet
 
 echo -e "${YELLOW}==== CHECKING PREVIEW BUILD COMMENTS ====${NC}"
 #get all users who commented in an array
-mapfile -t PREVIEW_BOT_COMMENTS < <(curl -H "Authorization: token ${GH_BOT_TOKEN}" https://api.github.com/repos/${BASE_REPO}/issues/${PR_NUMBER}/comments | jq '.[].user.login' | tr -d '"')
+PREVIEW_BOT_COMMENTS=$(curl -H "Authorization: token ${GH_BOT_TOKEN}" https://api.github.com/repos/${BASE_REPO}/issues/${PR_NUMBER}/comments | jq '.[].user.login' | tr -d '"')
 echo "-------------------------------------------------COMMENT AUTHOR-----------------------------------------------------"
 echo "${PREVIEW_BOT_COMMENTS}"
 echo "--------------------------------------------------------------------------------------------------------------------"
