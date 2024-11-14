@@ -100,11 +100,11 @@ pre {
 
 code {
   font-weight: 400;
-  color: rgb(226 232 240 / 0.9);
+  color: rgba(46, 48, 50, 0.9);
 }
 
 pre {
-  color: rgb(226 232 240 / 0.9);
+  color: rgb(31 41 55 / 0.9);
   line-height: 1.45;
   text-rendering: optimizeSpeed;
   white-space: pre-wrap;
@@ -1081,7 +1081,7 @@ table.tableblock.fit-content > caption.title {
   border: 1px solid #dbdbd6;
   margin-bottom: 1.25em;
   padding: 1.25em;
-  background: #f3f3f2;
+  background: #0f172a;
   border-radius: 4px;
 }
 
