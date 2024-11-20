@@ -1137,7 +1137,7 @@ table.tableblock.fit-content > caption.title {
 .listingblock > .content > pre:not(.highlight),
 .listingblock > .content > pre[class=highlight],
 .listingblock > .content > pre[class^="highlight "] {
-  background: #1e293b;
+  background: #f7f7f8;
 }
 
 .literalblock.output pre {
